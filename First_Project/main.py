@@ -1,3 +1,5 @@
-#Alex anderson, first programming project
+import random
 
-print("Hello World")
+num = random.randint(1,20)
+print("Hello world")
+print(num)
