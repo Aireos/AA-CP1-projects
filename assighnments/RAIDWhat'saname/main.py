@@ -2,14 +2,14 @@
 
 #making the definition of calulate_one
 def calculate_one(x, y):
-    z = x * y
-    return z
+    area = x * y
+    return area
 
 
 #making def of calculate_two
 def calculate_two(a, b, c):
-    temp = calculate_one(a, b)
-    result = temp * c
+    volume = calculate_one(a, b)
+    result = volume * c
     return result
 
 #calulation to find the flat size
