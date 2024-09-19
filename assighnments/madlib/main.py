@@ -1,0 +1,6 @@
+number = input("Type a number 1-10: ")
+hair_coler = input("Type a hair coler: ")
+animal = input("Type a animal: ")
+place = input("Type a place: ")
+name = input("Type a name: ")
+print("Hi, i'm", name, "and I have", hair_coler, "hair. I like", animal + "s that have", hair_coler, "hair!")
