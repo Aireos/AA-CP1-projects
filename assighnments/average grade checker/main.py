@@ -1,4 +1,4 @@
-
+#Alexander Anderson Grade checker
 one = int(input("What is the grade for your 1 class?: "))
 two = int(input("What is the grade for your 2 class?: "))
 three = int(input("What is the grade for your 3 class?: "))
