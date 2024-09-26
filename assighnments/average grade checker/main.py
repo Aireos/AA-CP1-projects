@@ -1,23 +1,15 @@
 
-numberofclasses = ''
-grade = ''
-average_grade = ''
+one = int(input("What is the grade for your 1 class?: "))
+two = int(input("What is the grade for your 2 class?: "))
+three = int(input("What is the grade for your 3 class?: "))
+four = int(input("What is the grade for your 4 class?: "))
+five = int(input("What is the grade for your 5 class?: "))
+six = int(input("What is the grade for your 6 class?: "))
+seven = int(input("What is the grade for your 7 class?: "))
+added = one + two + three + four + five + six + seven
+averagegrade = added / 7
+print("The average grade is:", averagegrade)
 
-def algorithim(numberofclasses):
-    totalgrade = 0
-    for amount in numberofclasses:
-        totalgrade += (int(input('What is the grade for this class?: ')))      
-    return (totalgrade)
 
-
-numberofclasses = (input('What is the number of classes?: '))
-
-totalgrade = algorithim(numberofclasses)
-
-numberofclasses = int(numberofclasses)
-
-average_grade = totalgrade / numberofclasses
-
-print("The average grade is:", average_grade)
 
 
