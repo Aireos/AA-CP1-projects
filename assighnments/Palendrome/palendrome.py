@@ -1,3 +1,4 @@
+#Alexander Anderson  palandrom
 text = input('What do you want to check to see if it is a palendrome?: ')
 reversedtext = text[::-1]
 if text == reversedtext:
