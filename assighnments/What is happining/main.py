@@ -35,7 +35,7 @@ def main():
         print("5. Exit")
         
         choice = input("Enter your choice (1-5): ")
-        #setting what happens when they choose every type
+        #setting what happens when they choose the create acount option
         if choice == '1':
             account = create_account()
             accounts[account.account_number] = account
