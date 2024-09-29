@@ -1,8 +1,10 @@
-import time
-infinite = True
-a = 2
-generater = (a*9999999999)
-while infinite == True:
-    print(generater*2)
 
- 
+
+def function_one(prt_one, prt_two):
+    prt_three = ''
+    prt_three = prt_one * prt_two
+    return prt_three
+
+prt_three = function_one(2, 2)
+
+print(prt_three)
