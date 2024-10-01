@@ -21,7 +21,7 @@ class BankAccount:
             return True
         return False
         
-#creating the definition for what happens when they want to check their balence
+#creating the definition for what happens when they want to check their balance
     def get_balance(self):
         return self.balance
         
@@ -36,14 +36,16 @@ def main():
     accounts = {}
     while True:
         
-        #asking what they are wanting to do.
+        #asking what they want to do.
         print("\n1. Create Account")
         print("2. Deposit")
         print("3. Withdraw")
         print("4. Check Balance")
         print("5. Exit")
-        # variable choice will be the option they want to do out of the options above
+        
+        # variable: choice = the option they want to do out of the options above
         choice = input("Enter your choice (1-5): ")
+        
         #if we look above we can see that choice 1 was creating an account.
         if choice == '1':
             #using definition made above
