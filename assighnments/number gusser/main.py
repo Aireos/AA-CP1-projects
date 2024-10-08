@@ -11,7 +11,79 @@
 #set that if guess == number: tell them that they were correct
 #set else: tell them that they were incorrect
 
+totalcorrect = 0
+totalwrong = 0
 import random
-print("Welcome to the number guessing game!")
+print("Welcome to the 10 number guessing game!")
+
+while True:
+    number = random.randint(1, 10)
+    guess = int(input("What is your guess for what number it is?: "))
+
+    if guess == number:
+        totalcorrect += 1
+        y_or_n = input("You got it! Would you like to continue playing? (y or n): ")
+        print('')
+        
+        if y_or_n == 'n':
+
+            y_or_n_2 = input("would you like to see your win-to-loss ratio? (y or n): ")
+
+            if y_or_n_2 == 'y':
+                print("Your current win-to-loss ratio is:")
+                print(totalcorrect, '/', totalwrong + totalcorrect)
+                print('')
+                break
+
+            else: 
+                print("ending game...")
+                print('')
+                break            
+
+        elif y_or_n == 'y':
+            y_or_n_2 = input("would you like to see your win-to-loss ratio? (y or n): ")
+
+            if y_or_n_2 == 'y':
+                print("Your current win-to-loss ratio is:")
+                print(totalcorrect, '/', totalwrong + totalcorrect)
+                print('')
+                
+
+            else: 
+                print("reseting game...")
+                print('')
+    else:
+        totalwrong += 1
+        y_or_n = input("You missed it. Would you like to continue playing? (y or n): ")
+        print('')
+        
+        if y_or_n == 'n':
+
+            y_or_n_2 = input("would you like to see your win-to-loss ratio? (y or n): ")
+
+            if y_or_n_2 == 'y':
+                print("Your current win-to-loss ratio is:")
+                print(totalcorrect, '/', totalwrong + totalcorrect)
+                print('')
+                break
+
+            else: 
+                print("ending game...")
+                print('')
+                break            
+
+        elif y_or_n == 'y':
+            y_or_n_2 = input("would you like to see your win-to-loss ratio? (y or n): ")
+
+            if y_or_n_2 == 'y':
+                print("Your current win-to-loss ratio is:")
+                print(totalcorrect, '/', totalwrong + totalcorrect)
+                print('')
+                
+
+            else: 
+                print("reseting game...")
+                print('')
+
 
 
