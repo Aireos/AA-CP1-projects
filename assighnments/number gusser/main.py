@@ -11,52 +11,68 @@
 #set that if guess == number: tell them that they were correct
 #set else: tell them that they were incorrect
 
+
+
+
+#importing needed parts
 totalcorrect = 0
 totalwrong = 0
 import random
+
+#starting what they see
 print("Welcome to the 10 number guessing game!")
 
 while True:
+    #setting number maker that changes every time
     number = random.randint(1, 10)
     guess = int(input("What is your guess for what number it is?: "))
 
+    #setting what happens if they guess correctly
     if guess == number:
         totalcorrect += 1
         y_or_n = input("You got it! Would you like to continue playing? (y or n): ")
         print('')
         
+        #setting what happens if they do not want to keep playing
         if y_or_n == 'n':
 
             y_or_n_2 = input("would you like to see your win-to-loss ratio? (y or n): ")
 
+            #setting what happens when they want to see their win to loss ratio
             if y_or_n_2 == 'y':
                 print("Your current win-to-loss ratio is:")
                 print(totalcorrect, '/', totalwrong + totalcorrect)
                 print('')
                 break
-
+            
+            #setting what happens if they don't wnat to see their win to loss ratio
             else: 
                 print("ending game...")
                 print('')
                 break            
-
+        
+        #setting what happens if they want to keep playing
         elif y_or_n == 'y':
             y_or_n_2 = input("would you like to see your win-to-loss ratio? (y or n): ")
 
+            #setting what happens when they want to see their win to loss ratio
             if y_or_n_2 == 'y':
                 print("Your current win-to-loss ratio is:")
                 print(totalcorrect, '/', totalwrong + totalcorrect)
                 print('')
                 
-
+            #setting what happens if they don't wnat to see their win to loss ratio
             else: 
                 print("reseting game...")
                 print('')
+
+    #setting what happens if they guess incorrectly
     else:
         totalwrong += 1
         y_or_n = input("You missed it. Would you like to continue playing? (y or n): ")
         print('')
-        
+
+        #copied over previous code used in what happens if they guessed correctly
         if y_or_n == 'n':
 
             y_or_n_2 = input("would you like to see your win-to-loss ratio? (y or n): ")
