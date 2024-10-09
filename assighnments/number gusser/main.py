@@ -87,3 +87,24 @@ while True:
 
 
 
+# Does the program run?
+# Yes
+# Did you do something that made the program stop working, if so then what?
+# entered random symbols
+# Were you able to use the program without any help from the programmer (Meaning nothing had to be explained to you)
+# Yes
+# If you needed further explanation on things, what explanations did you need?
+# None
+#--------------------------------------------------------------------------------------------------------------------
+# Does the program run?
+# Yes
+# Did you do something that made the program stop working, if so then what?
+# random symbols
+# Were you able to use the program without any help from the programmer (Meaning nothing had to be explained to you)
+# Yes
+# If you needed further explanation on things, what explanations did you need?
+# What to do after gussing the number
+#--------------------------------------------------------------------------------------------------------------------
+# I could add spaces between questions to make it easier to understand and follow along.
+# I could tell the user if their guess was to high or low
+# Explain how to play a little better before the first question
