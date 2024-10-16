@@ -37,6 +37,7 @@ def make_choice(options):
             else:
                 print("You fail to overcome the challenge.")
                 return False
+                
         def play_game():
                 display_intro()
                 treasure_found = False
