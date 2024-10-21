@@ -8,8 +8,7 @@ def make_choice(options):
 
     while True:
         try:
-            choice = int(input("Enter your choice: ")),
-
+            choice = int(input("Enter your choice: "))
             if 1<=choice<=len(options): 
                 return choice
             
