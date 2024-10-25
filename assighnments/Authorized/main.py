@@ -1,6 +1,6 @@
 
 
-admins = ["Jerry","Hamilton","Ms.Larose"]
+admins = ["Jerry","Hamilton","Ms.Larose","Luke"]
 
 users = ["Billy","Bob","Joe","Alex"]
 
