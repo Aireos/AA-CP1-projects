@@ -6,13 +6,15 @@ users = ["Billy","Bob","Joe","Alex"]
 
 name = (input("What is your name?: "))
 
+name = name.capitalize()
+
 if name in admins:
-    status = "a admin"
+    status = "a admin!"
 
 elif name in users:
-    status = "a user"
+    status = "a user."
 
 else:
-    status = "unautherized"
+    status = "unautherized, get out"
 
 print("you are", status)
