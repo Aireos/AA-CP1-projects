@@ -10,6 +10,8 @@ def is_there_a_number(s):
 
 while is_password_enough == False:
 
+    wrongthings = []
+
     password = input("what do you want your password to be?: ")
 
     if len(password) < 8:
