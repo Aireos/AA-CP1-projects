@@ -17,29 +17,71 @@ def C_O_I(user_answer, answer):
         print("You got it wrong.")
         print()
         return correct
-
-print("math quiz time!")
 print()
-print("A = 1")
-print("B = 2")
-print("C = 3")
-print("D = 4")
+print("math quiz time!")
 print()
 
 #first question
-user_answer = input("What is 2+1 (A, B, C or D): ").lower()
-answer = "c"
+user_answer = int(input("What is 2+1 (1, 2, 3 or 4): "))
+answer = 3
 correct = C_O_I(user_answer, answer)
 
-#second question hard
-if correct == True:
-    user_answer = input("What is 2-1 (A, B, C or D): ")
-    answer = "a"
-    correct = C_O_I(user_answer, answer)
+while True:
+    #second question hard
+    if correct == True:
+        user_answer = int(input("What is 2-1 (1, 2, 3 or 4): "))
+        answer = 1
+        correct = C_O_I(user_answer, answer)
+        break
 
-#second question easy
-elif correct == False:
-    user_answer = input("What is 1+1 (A, B, C or D): ")
-    answer = "b"
-    correct = C_O_I(user_answer, answer)
+    #second question easy
+    elif correct == False:
+        user_answer = int(input("What is 1+1 (1, 2, 3 or 4): "))
+        answer = 2
+        correct = C_O_I(user_answer, answer)
+        break
 
+while True:
+    #third question hard
+    if correct == True:
+        user_answer = int(input("What is 4/2 (1, 2, 3 or 4): "))
+        answer = 1
+        correct = C_O_I(user_answer, answer)
+        break
+
+    #third question easy
+    elif correct == False:
+        user_answer = int(input("What is 4-2 (1, 2, 3 or 4): "))
+        answer = 2
+        correct = C_O_I(user_answer, answer)
+        break
+
+while True:
+    #fourth question hard
+    if correct == True:
+        user_answer = int(input("What is 2*2 (1, 2, 3 or 4): "))
+        answer = 1
+        correct = C_O_I(user_answer, answer)
+        break
+
+    #fourth question easy
+    elif correct == False:
+        user_answer = int(input("What is 2/2 (1, 2, 3 or 4): "))
+        answer = 2
+        correct = C_O_I(user_answer, answer)
+        break
+
+while True:
+    #fith question hard
+    if correct == True:
+        user_answer = int(input("What is 2-1 (1, 2, 3 or 4): "))
+        answer = 1
+        correct = C_O_I(user_answer, answer)
+        break
+
+    #fith question easy
+    elif correct == False:
+        user_answer = int(input("What is 1+1 (1, 2, 3 or 4): "))
+        answer = 2
+        correct = C_O_I(user_answer, answer)
+        break
