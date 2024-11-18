@@ -1,52 +1,75 @@
 
-
 while True:
 
     equation = input("What equation are you trying to do?: ")
 
-    x = (input("what is your first number?: "))
+    x = input("what is your first number?: ")
 
-    y = (input("what is your second number?: "))
+    y = input("what is your second number?: ")
 
+    
+    try:
+        int(x)
+        x = int(x)
 
-    if is int(x):
-        break
-    else:
+    except:
         print("invalid first #")
+
+        try:
+            int(y)
+            y = int(y)   
+        except:
+            print("invalid second #")
+            continue
+        else: 
+            continue
+        
+    try:
+        int(y)
+        y = int(y)   
+        
+    except:
+        print("invalid second #")
         continue
     
 
-    if not y == int:
-        print("invalid second #")
-        continue
-
-
-    if '//' in equation:
+    if '//' == equation:
         print("answer:", x//y)
         break
+            
 
-    elif '*' in equation:
+    elif '*' == equation:
         print("answer:", x*y)
         break
+            
 
-    elif '+' in equation:
+    elif '+' == equation:
         print("answer:", x+y)
         break
+            
 
-    elif '/' in equation:
+    elif '/' == equation:
         print("answer:", x/y)
         break
+            
 
-    elif '^' in equation:
+    elif '^' == equation:
         print("answer:", x**y)
         break
+            
 
-    elif '-' in equation:
+    elif '-' == equation:
         print("answer:", x-y)
         break
+            
 
-    elif '%' in equation:
+    elif '%' == equation:
         print("answer:", x%y)
         break
+
+    else:
+        print("invalid equation")
+        continue
+
 
 print("Have a good day!")
