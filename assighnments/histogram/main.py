@@ -23,16 +23,3 @@ for i in amounts:
     number = placment + 1
     number = str(number)
     print(number + ":", nospace.join(amount))
-
-
-    
-    
-
-
-#for i in amounts:
-#   i = int(i)
-#   while i >= 1:
-#       i -= 1
-#       amount1 += "*"
-#amount1 = nospace.join(amount1)
-#print("1:",amount1)
