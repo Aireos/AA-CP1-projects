@@ -176,16 +176,42 @@ while game_end == False:
 # If statement for bank
             if town_square_decicion == "bank":
 # While true statement
+		while True:
 # Print a list of all their items
-                for item in items:
-                    print(item[0])
+	                for item in items:
+	                    print(item[0])
 # Input asking what they want to sell
-                bank_input = input("do you want to sell any of these items at 1/2 buy cost? (write no if you don't want to sell anything): ")
+	                bank_input = input("do you want to sell any of these items at 1/2 buy cost? (write no if you don't want to sell anything): ")
 # If the item is in the list of all their items
 # Sell item
-# While true statement
+			found_bank_item = False
+			for item in items:
+				if bank_input == "no":
+					found_bank_item = True
+					break
+				if bank_input == item[0]:
+					print("Item sold")
+					if item[1] == 10:
+						gold += 5
+					if item[1] == 20:
+						gold += 10
+					if item[1] == 30:
+						gold += 15
+					if item[1] == 40:
+						gold += 20
+					if item[1] == 50:
+						gold += 25
+					items -= [item]
+					found_bank_item = True
+					break
+			if found_bank_item == False:
+				print("invalid input")
+				continue
 # Input asking if they want to sell something else
+			bank_choice = input("Do you want to sell anything else? (yes or no): ")
 # If  they say no, break
+			if bank_choice == "no":
+				break
 # If they say yes, continue
 # Else it should say invalid input and continue
 # Else it should print invalid input and continue
