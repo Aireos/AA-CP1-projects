@@ -42,7 +42,7 @@ print("Welcome,", full_name + ", to the island of Merina")
 armor = 0
 ring = 0
 weapon = 0
-gold = 0
+gold = 1000
 items = []
 
 # Ogre stats list
@@ -132,7 +132,7 @@ def shop(shoplist, gold, items):
             if wanted_item == list[0]:
                 if list[1] <= gold:
                     gold -= list[1]
-                    items += list
+                    items += [list]
                     print("Item bought, leftover gold:", gold)
                     return gold, items
                 else:
@@ -152,30 +152,35 @@ game_end = False
 # While the variable game_end is equal to false
 while game_end == False:
 # input asking if they want to go up, down, left, or right
-    direction_choice = str(input("Do you want to go up, down, left, or right"))
+    direction_choice = input("Do you want to go up, down, left, or right?: ")
 # if statement for up
-# A while true statement
+    if direction_choice == "up":
 # print the statement: “You are now in the town square.”
+        print("Welcome to the town square.")
+# A while true statement
+        while True:
 # input statement asking if they want to go to the blacksmith, bank, or grocery.
+            town_square_decicion = input("Do you want to go to the blacksmith, bank, or the ring shop?: ")
 # if statement for Blacksmith
+            if town_square_decicion == "blacksmith":
 # Run the shop function with the item list for the blacksmith
+                gold, items = shop(blacksmith_list, gold, items)
 # Break
+                break
 # If statement for grocery
-# While true statement
-# Input asking if they want health items/food or stat-increasers/potions
-# If statement for food
-# Run the shop function with the item list for the grocery
-# Break
-# If statement for potions
+            if town_square_decicion == "ring shop":
 # Run the shop function with the item list for the potion grocery
+                gold, items = shop(ring_list, gold, items)
 # Break
-# otherwise/else statement
-# Print that they had a invalid input and they should enter potions or food
-# Continue
+                break
 # If statement for bank
+            if town_square_decicion == "bank":
 # While true statement
 # Print a list of all their items
+                for item in items:
+                    print(item[0])
 # Input asking what they want to sell
+                bank_input = input("do you want to sell any of these items at 1/2 buy cost? (write no if you don't want to sell anything): ")
 # If the item is in the list of all their items
 # Sell item
 # While true statement
