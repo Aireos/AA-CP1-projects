@@ -1,3 +1,4 @@
+import random
 nospace = ""
 onespace = " "
 
@@ -21,62 +22,137 @@ if 'None' == lastname:
     random_lastname_number = random.randint(1,8)
     if random_lastname_number == 1:
         lastname = "Hilton"
-        full_name = firstname + " " + lastname
     if random_lastname_number == 2:
         lastname = "West"
-        full_name = firstname + " " + lastname
     if random_lastname_number == 3:
         lastname = "Hope"
-        full_name = firstname + " " + lastname
     if random_lastname_number == 4:
         lastname = "Lopez"
-        full_name = firstname + " " + lastname
     if random_lastname_number == 5:
         lastname = "Dawson"
-        full_name = firstname + " " + lastname
     if random_lastname_number == 6:
         lastname = "Pierce"
-        full_name = firstname + " " + lastname
     if random_lastname_number == 7:
         lastname = "Ashford"
-        full_name = firstname + " " + lastname
     if random_lastname_number == 8:
         lastname = "Spade"
-        full_name = firstname + " " + lastname
     
-
+full_name = firstname + " " + lastname
 print("Welcome,", full_name + ", to the island of Merina")
 armor = 0
 ring = 0
 weapon = 0
-# Import random
-import random
+gold = 0
+items = []
+
 # Ogre stats list
 #                              dmg  hth arm
 Ogre_stats = [random.randint(13,18), 20, 0]
+
 # User base stats list
-User_stats = [11 + weapon, 11 + ring, 11 + armor]
+User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
+
 # Contestants list that will include ten contestants of differing strengths.
 Contestants = [[random.randint(25,30), 8, 8, "Archer"],[random.randint(12,17), 13, 13, "Warriar"],[random.randint(9,14), 30, 16, "Palidin"],[random.randint(15,30), 10, 10, "Spear-weilder"],[random.randint(10,20), 9, 14, "Rogue"],[random.randint(12,24), 11, 8, "Wizard"],[random.randint(5,30), 10, 9, "Barbarian"],[random.randint(12,16), 20, 18, "Dwarf"],[random.randint(10,15), random.randint(12,21), 10, "Bard"],[18, 18, 18, "Champion"]]
+
 # a item list for the blacksmith
-blacksmith_list = [["Armor (+1)", 10, 1, 1], ["Armor (+2)", 20, 2, 1], ["Armor (+3)", 30, 3, 1], ["Armor (+4)", 40, 4, 1]]
+blacksmith_list = [["Armor(+1)", 10, 1, 1], ["Armor(+2)", 20, 2, 1], ["Armor(+3)", 30, 3, 1], ["Armor(+4)", 40, 4, 1]]
+
 # a item list for the ring shop
-ring_list = [["Ring (+1)", 10, 1, 2], ["Ring (+2)", 20, 2, 2], ["Ring (+3)", 30, 3, 2], ["Ring (+4)", 40, 4, 2]]
+ring_list = [["Ring(+1)", 10, 1, 2], ["Ring(+2)", 20, 2, 2], ["Ring(+3)", 30, 3, 2], ["Ring(+4)", 40, 4, 2]]
+
 # a item list for the shop in the arena
-arena_list = [["Weapon (+1)", 10, 1, 3], ["Weapon (+2)", 20, 2, 3], ["Weapon (+3)", 30, 3, 3], ["Weapon (+4)", 40, 4, 3]]
+arena_list = [["Weapon(+1)", 10, 1, 3], ["Weapon(+2)", 20, 2, 3], ["Weapon(+3)", 30, 3, 3], ["Weapon(+4)", 40, 4, 3]]
+
 # an item list for the traveling trader’s shop.
-blacksmith_list = [["Armor (+1)", 10, 1, 1], ["Ring (+1)", 10, 1, 2], ["Weapon (+1)", 10, 1, 3]]
+trader_list = [["Armor(+1)", 10, 1, 1], ["Ring(+1)", 10, 1, 2], ["Weapon(+1)", 10, 1, 3]]
+
+
 # chance function that will be used whenever there is a chance an event occurs.
 def chance(percent):
     if (random.randint(1,percent)) == 1:
         return True
     else:
         return False
+    
+
 # battle function that will check who wins based on their three stats.
+# 1 output = player1 won, 2 output = player2 won, 3 = it was a tie
+def battle(player1,player2):
+    player2health = player2[1] - (player1[0] - player2[2])
+    player1health = player1[1] - (player2[0] - player1[2])
+    if player1health <= 0:
+        if player2health <= 0:
+            if player2health > player1health:
+                print(player2[3], "won!")
+                return 2
+            if player1health > player2health:
+                print(player1[3], "won!")
+                return 1
+            else:
+                print("It was a tie!")
+                return 3
+        print(player2[3], "won!")
+        return 2
+    if player2health <= 0:
+        print(player1[3], "won!")
+        return 1
+    else:
+        while True:
+            player2health = player2health - (player1[0] - player2[2])
+            player1health = player1health - (player2[0] - player1[2])
+            if player1health <= 0:
+                if player2health <= 0:
+                    if player2health > player1health:
+                        print(player2[3], "won!")
+                        return 2
+                    if player1health > player2health:
+                        print(player1[3], "won!")
+                        return 1
+                    else:
+                        print("It was a tie!")
+                        return 3
+                print(player2[3], "won!")
+                return 2
+            if player2health <= 0:
+                print(player1[3], "won!")
+                return 1
+            else:
+                continue
+
+
 # function for shops so that it is easy to make all the shops work
-# Print the statement: “Welcome to the island of Merina”
+def shop(shoplist, gold, items):
+    print("current gold:", gold)
+    while True:
+        for list in shoplist:
+            print(list[0], "costs:", list[1])
+        wanted_item = str(input("What one of these items do you want? if you want to leave type (leave), write full name, example: Armor(+1): "))
+        for list in shoplist:
+            if wanted_item == list[0]:
+                if list[1] <= gold:
+                    gold -= list[1]
+                    items += list
+                    print("Item bought, leftover gold:", gold)
+                    return gold, items
+                else:
+                    print("Too expensive!")
+                    shop_choice = input("do you wish do leave (yes) or type anything else to buy somthing else: ")
+                    if shop_choice == "yes":
+                        return gold, items
+                    else:
+                        continue
+        if wanted_item == "leave":
+            return gold, items
+        else:
+            print("That item does not exist!")
+            continue
+
+game_end = False
 # While the variable game_end is equal to false
+while game_end == False:
 # input asking if they want to go up, down, left, or right
+    direction_choice = str(input("Do you want to go up, down, left, or right"))
 # if statement for up
 # A while true statement
 # print the statement: “You are now in the town square.”
