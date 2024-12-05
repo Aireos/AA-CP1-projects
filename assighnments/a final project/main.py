@@ -147,12 +147,12 @@ def shop(shoplist, gold, items):
         else:
             print("That item does not exist!")
             continue
-
 game_end = False
+directions = ["do you want to go", "up,", "down,", "left,", "or", "right?: "]
 # While the variable game_end is equal to false
 while game_end == False:
 # input asking if they want to go up, down, left, or right
-    direction_choice = input("Do you want to go up, down, left, or right?: ")
+    direction_choice = input(onespace.join(directions))
 # if statement for up
     if direction_choice == "up":
 # print the statement: “You are now in the town square.”
@@ -165,60 +165,64 @@ while game_end == False:
             if town_square_decicion == "blacksmith":
 # Run the shop function with the item list for the blacksmith
                 gold, items = shop(blacksmith_list, gold, items)
-# Break
-                break
 # If statement for grocery
             if town_square_decicion == "ring shop":
 # Run the shop function with the item list for the potion grocery
                 gold, items = shop(ring_list, gold, items)
-# Break
-                break
 # If statement for bank
             if town_square_decicion == "bank":
-# While true statement
-		while True:
-# Print a list of all their items
-	                for item in items:
-	                    print(item[0])
+# While true statement\
+                found_bank_item = False
+                print()
+                while True:
+                    for item in items: print(item[0])
 # Input asking what they want to sell
-	                bank_input = input("do you want to sell any of these items at 1/2 buy cost? (write no if you don't want to sell anything): ")
+                    bank_input = input("do you want to sell any of the items above at 1/2 buy cost? (write no if you don't want to sell anything): ")
 # If the item is in the list of all their items
 # Sell item
-			found_bank_item = False
-			for item in items:
-				if bank_input == "no":
-					found_bank_item = True
-					break
-				if bank_input == item[0]:
-					print("Item sold")
-					if item[1] == 10:
-						gold += 5
-					if item[1] == 20:
-						gold += 10
-					if item[1] == 30:
-						gold += 15
-					if item[1] == 40:
-						gold += 20
-					if item[1] == 50:
-						gold += 25
-					items -= [item]
-					found_bank_item = True
-					break
-			if found_bank_item == False:
-				print("invalid input")
-				continue
-# Input asking if they want to sell something else
-			bank_choice = input("Do you want to sell anything else? (yes or no): ")
-# If  they say no, break
-			if bank_choice == "no":
-				break
-# If they say yes, continue
-# Else it should say invalid input and continue
-# Else it should print invalid input and continue
-# Break
-# Else it should say invalid input and continue
-# Break
+                    for item in items:
+                        if bank_input == "no":
+                            found_bank_item = True
+                            break
+                        if bank_input == item[0]:
+                            print("Item sold")
+                            if item[1] == 10:
+                                gold += 5
+                            if item[1] == 20:
+                                gold += 10
+                            if item[1] == 30:
+                                gold += 15
+                            if item[1] == 40:
+                                gold += 20
+                            if item[1] == 50:
+                                gold += 25
+                            items.remove(item)
+                            found_bank_item = True
+                            break
 
+                    if bank_input == "no":
+                        break
+
+                    if found_bank_item == False:
+                        print("invalid input")
+                        continue
+# Input asking if they want to sell something else
+                    bank_choice = input("Do you want to sell anything else? (yes or no): ")
+# If  they say no, break
+                    if bank_choice == "no":
+                        break
+# If they say yes, continue
+                    if bank_choice == "yes":
+                        continue
+# Else it should say invalid input and continue
+                    else:
+                        print("invalid input")
+                        continue
+            leave_town = input("Do you want to leave the town? (yes or no): ")
+            if leave_town == "yes":
+                break
+            if leave_town == "no":
+                continue
 
 
 
