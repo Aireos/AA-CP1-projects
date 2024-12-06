@@ -47,7 +47,7 @@ items = []
 
 # Ogre stats list
 #                              dmg  hth arm
-Ogre_stats = [random.randint(13,18), 20, 0]
+Ogre_stats = [random.randint(12,18), 20, 15, "Ogre"]
 
 # User base stats list
 User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
@@ -354,18 +354,38 @@ while game_end == False:
 # 				If input is equal to true
                     if runaway_or_not == "yes":
 # 					Break
+                        print("you run all the way to the crossroad in fear")
                         break
 # 				If input is equal to false
+                    if runaway_or_not == "no":
 # 						Do fighting function with user and ogre
+                        ogre_battle = battle(User_stats, Ogre_stats)
 # 						If win is equal to true
+                        if ogre_battle == 1:
 # 							Print that they found a +5 sword
+                            print("You found a +5 sword!")
 # 							Print that they decided to head back to town after the battle
+                            print("You decide to head back to the crossroad after the fight.")
 # 							Break
+                            break
 # 						If win is equal to false
+                        if ogre_battle == 2:
 # 							Print that they lost
+                            print("You respawn at the crossroad")
 # 							Break
+                            break
+                        if ogre_battle == 3:
+                            print("you decided to go back to the crossroad after the fight.")
+                            break
 # 			Else print that it was invalid input and continue
+                    else:
+                        print("Invalid input")
+                        continue
 # 			Break
+                    break
+            break
+
+
 # 	If statement for left
 # 		A while True statement
 # 			Input asking if they want to go to the stands, betting stand, store or fight.
