@@ -168,6 +168,7 @@ while game_end == False:
     if direction_choice == "up":
 # print the statement: “You are now in the town square.”
         print("Welcome to the town square.")
+        directions[1] = "town(up),"
 # A while true statement
         while True:
 # input statement asking if they want to go to the blacksmith, bank, or grocery.
@@ -228,7 +229,7 @@ while game_end == False:
                     if bank_choice == "yes":
                         continue
 # Else it should say invalid input and continue
-                    else:
+                    if bank_choice != "no" and bank_choice != "yes":
                         print("invalid input")
                         continue
             leave_town = input("Do you want to leave the town? (yes or no): ")
@@ -242,6 +243,7 @@ while game_end == False:
 
 # If statement for down
     if direction_choice == "down":
+        directions[2] = "trail split(down),"
 # 	A while true statement
         while True:
 # 		Input asking at a trail split to go down a sandy trail or a rocky one
@@ -260,8 +262,10 @@ while game_end == False:
                     if armor_found == True:
                         break
 # 				Input asking if you want to go to a strange man on the beach or wander around admiring the beauty.
-                    sandy_decicion = input("Do you want to go to a strange (man) on the beach or (wander) around admiring the beauty?: ")
+                    sandy_decicion = input("Do you want to go to a strange (man) on the beach or (wander) around admiring the beauty? (type exit to leave): ")
 # 			If the input is the man
+                    if sandy_decicion == "exit":
+                        break
                     if sandy_decicion == "man":
 # 				If you have crystals
                         if crystals == True:
@@ -284,7 +288,7 @@ while game_end == False:
                             game_end = True
                             break
 # 				Else print that he turns away saying not good enough yet and walks away, then set input to wander
-                        else:
+                        if gold < 200 and crystals == False:
                             print("You hear him mumble that your not good enough yet and he walks away")
                             sandy_decicion = "wander"
 # 		    If the input is wander
@@ -328,7 +332,7 @@ while game_end == False:
     # 							Break
                                     break
     # 						Else print invalid input, will count as false, and then break
-                                else:
+                                if wander_decicion != "yes" and wander_decicion != "no":
                                     print("invalid input, will count as false.")
                                     break
 # 		If input for rocky
@@ -392,12 +396,12 @@ while game_end == False:
                             print("you decided to go back to the crossroad after the fight.")
                             break
 # 			Else print that it was invalid input and continue
-                    else:
+                    if runaway_or_not != "yes" and  runaway_or_not != "no":
                         print("Invalid input")
                         continue
 #else statement
-            if trail_split_decicion != "sandy" or "rocky":
-                print("invalid input")
+            if trail_split_decicion != "rocky" and trail_split_decicion != "sandy":
+                print("invalid input (trail)")
                 continue
 
 
