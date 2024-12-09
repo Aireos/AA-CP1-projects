@@ -152,10 +152,18 @@ game_end = False
 crystals = False
 shipwreck_found = False
 directions = ["do you want to go", "up,", "down,", "left,", "or", "right?: "]
+crazy_wanderer = 0
+armor_found = False
+
+
 # While the variable game_end is equal to false
 while game_end == False:
 # input asking if they want to go up, down, left, or right
     direction_choice = input(onespace.join(directions))
+
+
+
+
 # if statement for up
     if direction_choice == "up":
 # print the statement: “You are now in the town square.”
@@ -163,7 +171,9 @@ while game_end == False:
 # A while true statement
         while True:
 # input statement asking if they want to go to the blacksmith, bank, or grocery.
-            town_square_decicion = input("Do you want to go to the blacksmith, bank, or the ring shop?: ")
+            town_square_decicion = input("Do you want to go to the blacksmith, bank, or the ring shop? (type leave if you want to go back to crossroad): ")
+            if town_square_decicion == "leave":
+                break
 # if statement for Blacksmith
             if town_square_decicion == "blacksmith":
 # Run the shop function with the item list for the blacksmith
@@ -230,19 +240,25 @@ while game_end == False:
 
 
 
-
-
-
 # If statement for down
     if direction_choice == "down":
 # 	A while true statement
         while True:
 # 		Input asking at a trail split to go down a sandy trail or a rocky one
-            trail_split_decicion = input("You have reached a trail split, would you like to go down the (sandy) trail or the (rocky) trail?: ")
+            if game_end == True:
+                break
+            if armor_found == True:
+                armor_found = False
+                break
+            trail_split_decicion = input("You have reached a trail split, would you like to go down the (sandy) trail or the (rocky) trail? (type leave if you want to go back to crossroad): ")
+            if trail_split_decicion == "leave":
+                break
 # 		If input for sandy
             if trail_split_decicion == "sandy":
 # 			While True statement
                 while True:
+                    if armor_found == True:
+                        break
 # 				Input asking if you want to go to a strange man on the beach or wander around admiring the beauty.
                     sandy_decicion = input("Do you want to go to a strange (man) on the beach or (wander) around admiring the beauty?: ")
 # 			If the input is the man
@@ -255,7 +271,6 @@ while game_end == False:
                             print("You realize your time on the island is over and you can't wait for your next adventure.")
 # 					Make variable game_end equal to True
                             game_end = True
-# 					break
                             break
 # 				If you have two hundred gold
                         if gold >= 200:
@@ -267,56 +282,55 @@ while game_end == False:
                             print("As you see the island for the last time, you are a little disrunled from the fact that he stole your gold but are happy to be going forward towards a new adventure.")
 # 					Make variable game_end equal to True
                             game_end = True
-# 					break
                             break
 # 				Else print that he turns away saying not good enough yet and walks away, then set input to wander
                         else:
                             print("You hear him mumble that your not good enough yet and he walks away")
                             sandy_decicion = "wander"
-# 		If the input is wander
-                if sandy_decicion == "wander":
-# 			While True statement
-                    while True:
-# 			Chance function at 10%
-                        boat_chance = chance(10)
-# 			If the chance function is equal to true
-                        if boat_chance == True and shipwreck_found == False:
-# 				Print that they found a shipwreck
-                            shipwreck_found = True
-                            print("You found a shipwreck!")
-# 				Print that the player looked inside and found a secret chest with a +5 armor inside
-                            print("you found a secret chest with +5 armor inside!")
-                            items += ["Armor(+5)", 50, 5, 1]
-# 				Print that the player decided to head back to town to celebrate
-                            print("you decide to head back to the crossroad after finding the armor")
-# 				Break
-                            break
-# 			If the chance function is equal to false
-                        if boat_chance == False or shipwreck_found == True:
-# 						Input saying that they did not find anything but do they want to try again?
-                            if shipwreck_found == False:
-                                wander_decicion = input("You did not find anything but do you want to try again? (yes or no):")
-                            if shipwreck_found == True:
-                                print("Why did you wander, if you already found the shipwreck!?")
+# 		    If the input is wander
+                    if sandy_decicion == "wander":
+    # 			While True statement
+                        while True:
+    # 			Chance function at 10%
+                            boat_chance = chance(5)
+    # 			If the chance function is equal to true
+                            if boat_chance == True and shipwreck_found == False:
+    # 				Print that they found a shipwreck
+                                shipwreck_found = True
+                                print("You found a shipwreck!")
+    # 				Print that the player looked inside and found a secret chest with a +5 armor inside
+                                print("you found a secret chest with +5 armor inside!")
+                                items += ["Armor(+5)", 50, 5, 1]
+    # 				Print that the player decided to head back to town to celebrate
+                                print("you decide to head back to the crossroad after finding the armor")
+                                armor_found = True
+    # 				Break
                                 break
-# 						If input is equal to true 
-                            if wander_decicion == "yes":
-# 							Continue
-                                continue
-# 						If input is equal to false
-                            if wander_decicion == "no":
-# 							Break
-                                break
-# 						Else print invalid input, will count as false, and then break
-                            else:
-                                print("invalid input, will count as false.")
-                                break
-# 				Else it should say invalid input and continue
-                else:
-                    print("invalid input")
-                    continue
-# 				Break
-                break
+    # 			If the chance function is equal to false
+                            if boat_chance == False or shipwreck_found == True:
+    # 						Input saying that they did not find anything but do they want to try again?
+                                if shipwreck_found == False:
+                                    wander_decicion = input("You did not find anything but do you want to try again? (yes or no):")
+                                if shipwreck_found == True:
+                                    if crazy_wanderer == 20:
+                                        print("Ok, If you really are doing this, I as the creator, force you off the island!")
+                                        game_end = True
+                                        break
+                                    print("Why did you wander, if you already found the shipwreck!?")
+                                    crazy_wanderer += 1
+                                    break
+    # 						If input is equal to true 
+                                if wander_decicion == "yes":
+    # 							Continue
+                                    continue
+    # 						If input is equal to false
+                                if wander_decicion == "no":
+    # 							Break
+                                    break
+    # 						Else print invalid input, will count as false, and then break
+                                else:
+                                    print("invalid input, will count as false.")
+                                    break
 # 		If input for rocky
             if trail_split_decicion == "rocky":
 # 			While True statement
@@ -330,7 +344,7 @@ while game_end == False:
 # 					Print that they found  secret side tunnel
                         print("You found a secret side tunnel!")
 # 					Chance function at 50%
-                        secret_tunnel_trap = chance(50)
+                        secret_tunnel_trap = chance(2)
 # 					If chance function is equal to true
                         if secret_tunnel_trap == True:
 # 						Print that they found a secret trap and were able to avoid it
@@ -381,9 +395,10 @@ while game_end == False:
                     else:
                         print("Invalid input")
                         continue
-# 			Break
-                    break
-            break
+#else statement
+            if trail_split_decicion != "sandy" or "rocky":
+                print("invalid input")
+                continue
 
 
 # 	If statement for left
@@ -477,6 +492,7 @@ while game_end == False:
 # 	Break
 # Else print that is a invalid input and continue
 # Continue
+print("Thanks for playing my game!")
 # Print “thanks for playing my game”
 
 
