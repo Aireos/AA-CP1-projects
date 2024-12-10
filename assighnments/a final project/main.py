@@ -53,7 +53,7 @@ Ogre_stats = [random.randint(12,18), 20, 15, "Ogre"]
 User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
 
 # Contestants list that will include ten contestants of differing strengths.
-Contestants = [[random.randint(25,30), 8, 8, "Archer"],[random.randint(12,17), 13, 13, "Warriar"],[random.randint(9,14), 30, 16, "Palidin"],[random.randint(15,30), 10, 10, "Spear-weilder"],[random.randint(10,20), 9, 14, "Rogue"],[random.randint(12,24), 11, 8, "Wizard"],[random.randint(5,30), 10, 9, "Barbarian"],[random.randint(12,16), 20, 18, "Dwarf"],[random.randint(10,15), random.randint(12,21), 10, "Bard"],[18, 18, 18, "Champion"]]
+Contestants = [[random.randint(11,17), 8, 8, "Archer"],[11, 11, 11, "Palidin"],[random.randint(11,15), 9, 9, "Rogue"],[random.randint(11,12), 15, 11, "Dwarf"],[random.randint(11,15), random.randint(12,27), 10, "Bard"],[19, 19, 19, "Champion"]]
 
 # a item list for the blacksmith
 blacksmith_list = [["Armor(+1)", 10, 1, 1], ["Armor(+2)", 20, 2, 1], ["Armor(+3)", 30, 3, 1], ["Armor(+4)", 40, 4, 1]]
@@ -75,10 +75,9 @@ def chance(percent):
     else:
         return False
     
-
 # battle function that will check who wins based on their three stats.
 # 1 output = player1 won, 2 output = player2 won, 3 = it was a tie
-def battle(player1,player2):
+def battle(player1,player2, continueing_times):
     player2health = player2[1] - (player1[0] - player2[2])
     player1health = player1[1] - (player2[0] - player1[2])
     if player1health <= 0:
@@ -86,7 +85,7 @@ def battle(player1,player2):
             if player2health > player1health:
                 print(player2[3], "won!")
                 return 2
-            if player1health > player2health:
+            elif player1health > player2health:
                 print(player1[3], "won!")
                 return 1
             else:
@@ -94,10 +93,11 @@ def battle(player1,player2):
                 return 3
         print(player2[3], "won!")
         return 2
-    if player2health <= 0:
+    elif player2health <= 0:
         print(player1[3], "won!")
         return 1
     else:
+        print("we are in the else")
         while True:
             player2health = player2health - (player1[0] - player2[2])
             player1health = player1health - (player2[0] - player1[2])
@@ -106,7 +106,7 @@ def battle(player1,player2):
                     if player2health > player1health:
                         print(player2[3], "won!")
                         return 2
-                    if player1health > player2health:
+                    elif player1health > player2health:
                         print(player1[3], "won!")
                         return 1
                     else:
@@ -114,10 +114,12 @@ def battle(player1,player2):
                         return 3
                 print(player2[3], "won!")
                 return 2
-            if player2health <= 0:
+            elif player2health <= 0:
                 print(player1[3], "won!")
                 return 1
-            else:
+            if player1health and player2health > 0 and continueing_times < 20:
+                continueing_times += 1
+                print("continuing")
                 continue
 
 
@@ -154,6 +156,7 @@ shipwreck_found = False
 directions = ["do you want to go", "up,", "down,", "left,", "or", "right?: "]
 crazy_wanderer = 0
 armor_found = False
+continueing_times = 0
 
 
 # While the variable game_end is equal to false
@@ -406,19 +409,39 @@ while game_end == False:
 
 
 # 	If statement for left
+    if direction_choice == "left":
+        directions[3] = "arena(left),"
+        print("Welcome to the arena")
 # 		A while True statement
-# 			Input asking if they want to go to the stands, betting stand, store or fight.
+        while True:
+            #Input asking if they want to go to the stands, betting stand, store or fight.
+            arena_input = input("Do you want to go to the stands, betting stand, store, fight, or leave?: ")
+            if arena_input == "leave":
+                break
 # 			If input is equal to stands
+            if arena_input == "stands":
 # 				While true statement
+                while True:
+                    player1 = Contestants[random.randint(0, 9)]
+                    player2 = Contestants[random.randint(0, 9)]
+                    while player2 == player1:
+                        player2 = Contestants[random.randint(0, 9)]
 # 					Print that they are watching (name) and (name) fight
+                    print("You are watching", player1[3], "and", player2[3], "fight.")
 # 					Do fighting function for the two of them
-# 					Tell user who won
+                    battle(player1, player2, continueing_times)
 # 					Input asking if they want to watch again
+                    stands_decicion = input("Do you wish to watch again? (yes or no): ")
 # 					If input is equal to no
-# 						Break
+                    if stands_decicion == "yes":
+                        continue
 # 					If input is equal to yes
-# 						Continue
+                    if stands_decicion == "no":
+                        break
 # 					Else print invalid input: will count as yes
+                    if stands_decicion != "yes" and stands_decicion != "no":
+                        print("invalid input, will count as yes")
+                        continue
 # 			If input is equal to betting stand
 # 				While true statement
 # 					Print that they are watching (name) and (name) fight
