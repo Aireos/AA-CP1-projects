@@ -1,4 +1,5 @@
 import random
+import time
 nospace = ""
 onespace = " "
 
@@ -53,7 +54,7 @@ Ogre_stats = [random.randint(12,18), 20, 15, "Ogre"]
 User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
 
 # Contestants list that will include ten contestants of differing strengths.
-Contestants = [[random.randint(11,17), 8, 8, "Archer"],[11, 11, 11, "Palidin"],[random.randint(11,15), 9, 9, "Rogue"],[random.randint(11,12), 15, 11, "Dwarf"],[random.randint(11,15), random.randint(12,27), 10, "Bard"],[19, 19, 19, "Champion"]]
+Contestants = [[random.randint(11,17), 8, 8, "Archer"],[11, 11, 11, "Palidin"],[random.randint(11,15), 9, 9, "Rogue"],[random.randint(11,12), 15, 11, "Dwarf"],[random.randint(11,15), random.randint(12,27), 10, "Bard"],[15, 15, 15, "Champion"]]
 
 # a item list for the blacksmith
 blacksmith_list = [["Armor(+1)", 10, 1, 1], ["Armor(+2)", 20, 2, 1], ["Armor(+3)", 30, 3, 1], ["Armor(+4)", 40, 4, 1]]
@@ -78,6 +79,7 @@ def chance(percent):
 # battle function that will check who wins based on their three stats.
 # 1 output = player1 won, 2 output = player2 won, 3 = it was a tie
 def battle(player1,player2, continueing_times):
+    continueing_times = 0
     player2health = player2[1] - (player1[0] - player2[2])
     player1health = player1[1] - (player2[0] - player1[2])
     if player1health <= 0:
@@ -117,7 +119,11 @@ def battle(player1,player2, continueing_times):
             elif player2health <= 0:
                 print(player1[3], "won!")
                 return 1
-            if player1health and player2health > 0 and continueing_times < 20:
+            elif continueing_times >= 50:
+                while True:
+                    time.sleep(1)
+                    print("Error in battle, restart game")
+            if player1health and player2health > 0 and continueing_times < 50:
                 continueing_times += 1
                 print("continuing")
                 continue
@@ -380,7 +386,7 @@ while game_end == False:
 # 				If input is equal to false
                     if runaway_or_not == "no":
 # 						Do fighting function with user and ogre
-                        ogre_battle = battle(User_stats, Ogre_stats)
+                        ogre_battle = battle(User_stats, Ogre_stats, continueing_times)
 # 						If win is equal to true
                         if ogre_battle == 1:
 # 							Print that they found a +5 sword
@@ -422,10 +428,10 @@ while game_end == False:
             if arena_input == "stands":
 # 				While true statement
                 while True:
-                    player1 = Contestants[random.randint(0, 9)]
-                    player2 = Contestants[random.randint(0, 9)]
+                    player1 = Contestants[random.randint(0, 5)]
+                    player2 = Contestants[random.randint(0, 5)]
                     while player2 == player1:
-                        player2 = Contestants[random.randint(0, 9)]
+                        player2 = Contestants[random.randint(0, 5)]
 # 					Print that they are watching (name) and (name) fight
                     print("You are watching", player1[3], "and", player2[3], "fight.")
 # 					Do fighting function for the two of them
@@ -443,42 +449,89 @@ while game_end == False:
                         print("invalid input, will count as yes")
                         continue
 # 			If input is equal to betting stand
+            if arena_input == "betting stand":
 # 				While true statement
+                while True:
 # 					Print that they are watching (name) and (name) fight
+                    player1 = Contestants[random.randint(0, 5)]
+                    player2 = Contestants[random.randint(0, 5)]
+                    while player2 == player1:
+                        player2 = Contestants[random.randint(0, 5)]
+# 					Print that they are watching (name) and (name) fight
+                    print("You are watching 1 /", player1[3], "and 2 /", player2[3], "fight.")
 # 					User guess input asking who that think will win
+                    betting_input = int(input("who do you think will win? (1 or 2): "))
 # 					Input asking how much they are willing to bet
+                    while True:
+                        betting_amount = int(input("how much gold are you wanting to bet?: "))
 # 					If input 2 is less then or equal to their money amount
+                        if betting_amount <= gold:
 # 						Print that the transaction worked
+                            print("transaction completed")
+                            break
 # 					Else print that they don’t have that much money and continue
+                        else:
+                            print("you do not have that much money.")
+                            continue
 # 					Do fighting function for the two of them
+                    betting_battle = battle(player1, player2, continueing_times)
 # 					If the users guess is correct
+                    if betting_battle == betting_input:
 # 						Give double gold back
-# 					If the users guess is wrong
+                        print("you got double your betted gold!")
+                        gold += betting_amount
+#                   if battle equals 3 print that the person they guessed for tied with the other one and give their gold back that they bet
+                    elif betting_battle == 3:
+                        print("because they tied you don't lose or gain anything.")
+# 					if battle is the other person won
+                    elif betting_battle != betting_input and betting_battle != 3:
 # 						Tell user that they lost all the gold
-# 					Else print that the person they guessed for didn’t exist and give their gold back that they bet
+                        print("you lost all the gold you bet")
+                        gold -= betting_amount
 # 					Input asking if they want to bet again
+                    bet_again = input("do you wish to bet again? (yes or no): ")
 # 					If input equals yes
+                    if bet_again == "yes":
 # 						Continue
+                        continue
 # 					If input equals no
+                    if bet_again == "no":
 # 						Break
+                        break
+                    else:
+                        print("invalid input, will count as no.")
+                        break
 # 			If input is equal to the store
+            if arena_input == "store":
 # 				Run the shop function with the item list for the arena store
+                gold, items = shop(arena_list, gold, items)
 
 
 
 
 # 			If the input is equal to fight
+            if arena_input == "fight":
 # 				While True statement
-# 				If they have 30 gold 
+                while True:
+                    player2 = Contestants[random.randint(0, 5)]
+# 				if gold is less then 30 print that they do not have enough money and break
+                    if gold < 30:
+                        print("you do not have enough gold")
+                        break
 # 					Print that they are fighting (name)
-# 				Else print that they do not have enough money and break
+                    print("you are fighting", player2[3])
 # 				Do fighting function for the two of them
-# 				Tell user who won
+                    user_battle = battle(User_stats, player2, continueing_times)
 # 				If user won
+                    if user_battle == 1:
 # 					Give user 60 gold
+                        gold += 60
 # 				If user lost
-# 					Have user lose 30 gold
+                    if user_battle == 2:
+# 					Have user lose 60 gold
+                        gold -= 60
 # 				Input asking if they want to fight again
+                    user_battle_input = input()
 # 				If input is equal to yes
 # 					Continue
 # 				If input is equal to no
