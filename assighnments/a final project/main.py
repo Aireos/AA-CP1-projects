@@ -1,7 +1,20 @@
 import random
 import time
+
 nospace = ""
 onespace = " "
+tunnel_collapse = False
+game_end = False
+crystals = False
+shipwreck_found = False
+directions = ["do you want to go", "up,", "down,", "left,", "or", "right?: "]
+crazy_wanderer = 0
+armor_found = False
+continueing_times = 0
+working = 10
+gold = 0
+shop_choice_answer = ""
+lockbox_found = False
 
 while True:
     full_name = input("What is your full name?: ")
@@ -123,7 +136,7 @@ ring_list = [["Ring(+1)", 10, 1, 2], ["Ring(+2)", 20, 2, 2], ["Ring(+3)", 30, 3,
 arena_list = [["Weapon(+1)", 10, 1, 3], ["Weapon(+2)", 20, 2, 3], ["Weapon(+3)", 30, 3, 3], ["Weapon(+4)", 40, 4, 3]]
 
 # an item list for the traveling trader’s shop.
-trader_list = [["Armor(+1)", 10, 1, 1], ["Ring(+1)", 10, 1, 2], ["Weapon(+1)", 10, 1, 3]]
+trader_list = [["Armor(+1)", 8, 1, 1], ["Ring(+1)", 8, 1, 2], ["Weapon(+1)", 8, 1, 3]]
 
 
 # chance function that will be used whenever there is a chance an event occurs.
@@ -190,6 +203,7 @@ def battle(player1,player2, continueing_times):
 def shop(shoplist, gold, items):
     print("current gold:", gold)
     while True:
+        item_found = False
         for list in shoplist:
             print(list[0], "costs:", list[1])
         wanted_item = str(input("What one of these items do you want? if you want to leave type (leave), write full name, example: Armor(+1): "))
@@ -205,22 +219,16 @@ def shop(shoplist, gold, items):
                     shop_choice = input("do you wish do leave (yes) or type anything else to buy somthing else: ")
                     if shop_choice == "yes":
                         return gold, items
-                    else:
+                    else:       
+                        item_found = True               
                         continue
         if wanted_item == "leave":
             return gold, items
+        if item_found == True:
+            continue
         else:
             print("That item does not exist!")
             continue
-tunnel_collapse = False
-game_end = False
-crystals = False
-shipwreck_found = False
-directions = ["do you want to go", "up,", "down,", "left,", "or", "right?: "]
-crazy_wanderer = 0
-armor_found = False
-continueing_times = 0
-
 
 # While the variable game_end is equal to false
 while game_end == False:
@@ -238,7 +246,7 @@ while game_end == False:
 # A while true statement
         while True:
 # input statement asking if they want to go to the blacksmith, bank, or grocery.
-            town_square_decicion = input("Do you want to go to the blacksmith, bank, or the ring shop? (type leave if you want to go back to crossroad): ")
+            town_square_decicion = input("Do you want to go to the (blacksmith), (bank), or the health (ring) shop? (type leave if you want to go back to crossroad): ")
             if town_square_decicion == "leave":
                 break
 # if statement for Blacksmith
@@ -246,7 +254,7 @@ while game_end == False:
 # Run the shop function with the item list for the blacksmith
                 gold, items = shop(blacksmith_list, gold, items)
 # If statement for grocery
-            if town_square_decicion == "health ring shop":
+            if town_square_decicion == "ring":
 # Run the shop function with the item list for the potion grocery
                 gold, items = shop(ring_list, gold, items)
 # If statement for bank
@@ -266,6 +274,8 @@ while game_end == False:
                             break
                         if bank_input == item[0]:
                             print("Item sold")
+                            if item[1] == 8:
+                                gold += 4
                             if item[1] == 10:
                                 gold += 5
                             if item[1] == 20:
@@ -620,17 +630,30 @@ while game_end == False:
 # 	While true statement
         while True:
 # 	Input statement asking if they want to Buy anything or work for him
-            input(".")
+            trader_decicion = input("He asks if you want to (buy) anything or if you want to (work) for him.")
 # 	If input is equal to buy anything
+            if trader_decicion == "buy":
 # 		Run the shop function with the item list for the traviling trader
+                gold, items = shop(trader_list, gold, items)
 # 	If input is equal to work for him
+            if trader_decicion == "work":
 # 		While times working here is at least 1
+                if working != 0:
+                    working -= 1
+                    while True:
 # 			Tell user that they did hard labor and have used one of their ten times working here
+                        print("you can only work", working, "times more.")
 # 			Give user 5 gold
-# 			Chance function at 5%
+                        gold += 5
+# 			Chance function at 10%
+                        box_find = chance(10)
 # 			If chance function is true and lockbox found is equal to false
+                        if box_find == True and lockbox_found == False:
 # 				Tell user they found a secret lockbox with 100 gold inside
+                            lockbox_found == True
+                            print("you found a secret lockbox with 100 gold inside!")
 # 				Input asking user if they want to steal it
+                            steal_input = input("Do you wish to steal the lockbox? (yes or no): ")
 # 				If input is equal to true
 # 					Lockbox found set to true
 # 					Chance function at 50%
