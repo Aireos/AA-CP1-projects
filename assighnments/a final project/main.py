@@ -40,15 +40,72 @@ if 'None' == lastname:
     
 full_name = firstname + " " + lastname
 print("Welcome,", full_name + ", to the island of Merina")
-armor = 0
-ring = 0
-weapon = 0
-gold = 1000
 items = []
 
+def weapon_player(items):
+    for list in items:
+        if item[0] == "Weapon(+5)":
+            return 5
+    for list in items:
+        if item[0] == "Weapon(+4)":
+            return 4
+    for list in items:
+        if item[0] == "Weapon(+3)":
+            return 3
+    for list in items:
+        if item[0] == "Weapon(+2)":
+            return 2
+    for list in items:
+        if item[0] == "Weapon(+1)":
+            return 1
+    else:
+        return 0
+
+def ring_player(items):
+    for list in items:
+        if item[0] == "Ring(+5)":
+            return 5
+    for list in items:
+        if item[0] == "Ring(+4)":
+            return 4
+    for list in items:
+        if item[0] == "Ring(+3)":
+            return 3
+    for list in items:
+        if item[0] == "Ring(+2)":
+            return 2
+    for list in items:
+        if item[0] == "Ring(+1)":
+            return 1
+    else:
+        return 0
+
+def armor_player(items):
+    for list in items:
+        if item[0] == "Armor(+5)":
+            return 5
+    for list in items:
+        if item[0] == "Armor(+4)":
+            return 4
+    for list in items:
+        if item[0] == "Armor(+3)":
+            return 3
+    for list in items:
+        if item[0] == "Armor(+2)":
+            return 2
+    for list in items:
+        if item[0] == "Armor(+1)":
+            return 1
+    else:
+        return 0
+
+ring = int(ring_player(items))
+armor = int(armor_player(items))
+weapon = int(weapon_player(items))
+
 # Ogre stats list
-#                              dmg  hth arm
-Ogre_stats = [random.randint(12,18), 20, 15, "Ogre"]
+#            dmg  hth arm
+Ogre_stats = [13, 13, 13, "Ogre"]
 
 # User base stats list
 User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
@@ -189,7 +246,7 @@ while game_end == False:
 # Run the shop function with the item list for the blacksmith
                 gold, items = shop(blacksmith_list, gold, items)
 # If statement for grocery
-            if town_square_decicion == "ring shop":
+            if town_square_decicion == "health ring shop":
 # Run the shop function with the item list for the potion grocery
                 gold, items = shop(ring_list, gold, items)
 # If statement for bank
@@ -292,7 +349,7 @@ while game_end == False:
 # 					Print saying “you ask why he just stole your gold and he tells you that it was the payment”
                             print("You ask why he took your gold and he says it was payment.")
 # 					Print saying “you sail into the horizon a little disgruntled but happy to get off the island.”
-                            print("As you see the island for the last time, you are a little disrunled from the fact that he stole your gold but are happy to be going forward towards a new adventure.")
+                            print("As you see the island for the last time, you are a little disgruntled from the fact that he stole your gold but are happy to be going forward towards a new adventure.")
 # 					Make variable game_end equal to True
                             game_end = True
                             break
@@ -501,6 +558,9 @@ while game_end == False:
                     else:
                         print("invalid input, will count as no.")
                         break
+
+
+
 # 			If input is equal to the store
             if arena_input == "store":
 # 				Run the shop function with the item list for the arena store
@@ -526,22 +586,41 @@ while game_end == False:
                     if user_battle == 1:
 # 					Give user 60 gold
                         gold += 60
+                        print("gain 60 gold")
 # 				If user lost
                     if user_battle == 2:
 # 					Have user lose 60 gold
                         gold -= 60
+                        print("loose 60 gold")
+                    if user_battle == 3:
+                        print("don't lose or gain anything")
 # 				Input asking if they want to fight again
-                    user_battle_input = input()
+                    user_battle_input = input("do you want to fight again? (yes or no): ")
 # 				If input is equal to yes
+                    if user_battle_input == "yes":
 # 					Continue
+                        continue
 # 				If input is equal to no
+                    if user_battle_input == "no":
 # 					Break
-# 		Else print that it was a invalid input and continue
-# 		Break
+                        break
+# 		Else print that it was a invalid input and break
+                    else:
+                        print("invalid input, will count as no")
+# 		                Break
+                        break
+            elif arena_input != "fight" and arena_input != "betting stand" and arena_input != "stands" and arena_input != "store":
+                print("invalid input")
+                continue
+
 # If statement for right
+    if direction_choice == "right":
 # 	Print that they have met the traviling merchant and he says hello
+        print("you have meet a traviling merchant and he says hello")
 # 	While true statement
+        while True:
 # 	Input statement asking if they want to Buy anything or work for him
+            input(".")
 # 	If input is equal to buy anything
 # 		Run the shop function with the item list for the traviling trader
 # 	If input is equal to work for him
