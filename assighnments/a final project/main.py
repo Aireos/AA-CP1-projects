@@ -169,7 +169,6 @@ def battle(player1,player2, continueing_times):
         print(player1[3], "won!")
         return 1
     else:
-        print("we are in the else")
         while True:
             player2health = player2health - (player1[0] - player2[2])
             player1health = player1health - (player2[0] - player1[2])
@@ -195,7 +194,6 @@ def battle(player1,player2, continueing_times):
                     print("Error in battle, restart game")
             if player1health and player2health > 0 and continueing_times < 50:
                 continueing_times += 1
-                print("continuing")
                 continue
 
 
@@ -525,7 +523,7 @@ while game_end == False:
                     while player2 == player1:
                         player2 = Contestants[random.randint(0, 5)]
 # 					Print that they are watching (name) and (name) fight
-                    print("You are watching 1 /", player1[3], "and 2 /", player2[3], "fight.")
+                    print("You are watching 1:", player1[3], "and 2:", player2[3], "fight.")
 # 					User guess input asking who that think will win
                     betting_input = int(input("who do you think will win? (1 or 2): "))
 # 					Input asking how much they are willing to bet
@@ -642,6 +640,8 @@ while game_end == False:
 # 		While times working here is at least 1
                 if working != 0:
                     while True:
+                        if working == 0:
+                            break
                         working -= 1
 # 			Tell user that they did hard labor and have used one of their ten times working here
                         print("you can only work", working, "times more.")
