@@ -630,7 +630,9 @@ while game_end == False:
 # 	While true statement
         while True:
 # 	Input statement asking if they want to Buy anything or work for him
-            trader_decicion = input("He asks if you want to (buy) anything or if you want to (work) for him.")
+            trader_decicion = input("He asks if you want to (buy) anything, (work) for him, or (leave): ")
+            if trader_decicion == "leave":
+                break
 # 	If input is equal to buy anything
             if trader_decicion == "buy":
 # 		Run the shop function with the item list for the traviling trader
@@ -650,32 +652,59 @@ while game_end == False:
 # 			If chance function is true and lockbox found is equal to false
                         if box_find == True and lockbox_found == False:
 # 				Tell user they found a secret lockbox with 100 gold inside
-                            lockbox_found == True
                             print("you found a secret lockbox with 100 gold inside!")
+# 					Lockbox found set to true
+                            lockbox_found == True
 # 				Input asking user if they want to steal it
                             steal_input = input("Do you wish to steal the lockbox? (yes or no): ")
 # 				If input is equal to true
-# 					Lockbox found set to true
+                            if steal_input == "yes":
 # 					Chance function at 50%
+                                stealing = chance(2)
 # 					If chance function is true
+                                if stealing == True:
 # 						Tell user they got away
+                                    print("you got away and gained 100 gold")
 # 						Give user 100 gold
+                                    gold += 100
 # 						Break
+                                    break
 # 					Else print that they go caught
+                                else:
+                                    print("you got caught and lost half of all your money")
 # 						Have user lose 50% of all money
+                                    gold = gold/2
 # 						Break
+                                    break
 # 			If chance function is false	
+                            if steal_input == "no":
+                                print("The wandering trader is happy for you not stealing his money and gives you a +5 ring")
+                                items += ["Ring(+5)", 50, 5, 1]
 # 			Ask user if they want to work again right now
+                        trader_input = input("would you like to work again right now? (yes or no): ")
 # 			If user answer is yes
+                        if trader_input == "yes":
 # 				Continue
+                            continue
 # 			If user answer is no 
+                        if trader_input == "no":
 # 				Break
-# 	Else print that it is a invalid input and continue
+                            break
+# 	Else print that it is a invalid input and break
+                        elif trader_input != "yes" and trader_input != "no":
+                            print("invalid input, will count as no")
+                            break
+            elif trader_decicion != "work" and trader_decicion != "buy":
+                print("invalid input")
+                continue
 # 	Break
+            break
 # Else print that is a invalid input and continue
-# Continue
-print("Thanks for playing my game!")
+    elif direction_choice != "up" and direction_choice != "down" and direction_choice != "right" and direction_choice != "left":
+        print("invalid input")
+        continue
 # Print “thanks for playing my game”
+print("Thanks for playing my game!")
 
 
 
