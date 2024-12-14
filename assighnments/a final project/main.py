@@ -364,7 +364,6 @@ while game_end == False:
 # 				Else print that he turns away saying not good enough yet and walks away, then set input to wander
                         if gold < 200 and crystals == False:
                             print("You hear him mumble that your not good enough yet and he walks away")
-                            sandy_decicion = "wander"
 # 		    If the input is wander
                     if sandy_decicion == "wander":
     # 			While True statement
@@ -409,6 +408,9 @@ while game_end == False:
                                 if wander_decicion != "yes" and wander_decicion != "no":
                                     print("invalid input, will count as false.")
                                     break
+                    elif sandy_decicion != "wander" and sandy_decicion != "man":
+                        print("invalid input")
+                        continue
 # 		If input for rocky
             if trail_split_decicion == "rocky":
 # 			While True statement
@@ -528,6 +530,7 @@ while game_end == False:
                     betting_input = int(input("who do you think will win? (1 or 2): "))
 # 					Input asking how much they are willing to bet
                     while True:
+                        print("you currently have", gold, "gold.")
                         betting_amount = int(input("how much gold are you wanting to bet?: "))
 # 					If input 2 is less then or equal to their money amount
                         if betting_amount <= gold:
