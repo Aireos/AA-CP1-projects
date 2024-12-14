@@ -641,8 +641,8 @@ while game_end == False:
             if trader_decicion == "work":
 # 		While times working here is at least 1
                 if working != 0:
-                    working -= 1
                     while True:
+                        working -= 1
 # 			Tell user that they did hard labor and have used one of their ten times working here
                         print("you can only work", working, "times more.")
 # 			Give user 5 gold
@@ -652,10 +652,10 @@ while game_end == False:
                         box_find = chance(10)
 # 			If chance function is true and lockbox found is equal to false
                         if box_find == True and lockbox_found == False:
+                            lockbox_found = True
 # 				Tell user they found a secret lockbox with 100 gold inside
                             print("you found a secret lockbox with 100 gold inside!")
 # 					Lockbox found set to true
-                            lockbox_found == True
 # 				Input asking user if they want to steal it
                             steal_input = input("Do you wish to steal the lockbox? (yes or no): ")
 # 				If input is equal to true
