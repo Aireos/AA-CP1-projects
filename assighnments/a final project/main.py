@@ -647,6 +647,7 @@ while game_end == False:
                         print("you can only work", working, "times more.")
 # 			Give user 5 gold
                         gold += 5
+                        print("you gain 5 gold")
 # 			Chance function at 10%
                         box_find = chance(10)
 # 			If chance function is true and lockbox found is equal to false
