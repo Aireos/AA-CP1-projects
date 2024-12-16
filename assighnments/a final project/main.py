@@ -7,14 +7,15 @@ tunnel_collapse = False
 game_end = False
 crystals = False
 shipwreck_found = False
-directions = ["do you want to go", "up,", "down,", "left,", "or", "right?: "]
+directions = ["do you want to go", "up,", "down,", "left,", "see your (stats),", "or go", "right?: "]
 crazy_wanderer = 0
 armor_found = False
 continueing_times = 0
 working = 10
-gold = 0
+gold = 100
 shop_choice_answer = ""
 lockbox_found = False
+ogre_won = False
 
 while True:
     full_name = input("What is your full name?: ")
@@ -57,71 +58,71 @@ items = []
 
 def weapon_player(items):
     for list in items:
-        if item[0] == "Weapon(+5)":
+        if list[0] == "Weapon(+5)":
             return 5
     for list in items:
-        if item[0] == "Weapon(+4)":
+        if list[0] == "Weapon(+4)":
             return 4
     for list in items:
-        if item[0] == "Weapon(+3)":
+        if list[0] == "Weapon(+3)":
             return 3
     for list in items:
-        if item[0] == "Weapon(+2)":
+        if list[0] == "Weapon(+2)":
             return 2
     for list in items:
-        if item[0] == "Weapon(+1)":
+        if list[0] == "Weapon(+1)":
             return 1
     else:
         return 0
 
 def ring_player(items):
     for list in items:
-        if item[0] == "Ring(+5)":
+        if list[0] == "Ring(+5)":
             return 5
     for list in items:
-        if item[0] == "Ring(+4)":
+        if list[0] == "Ring(+4)":
             return 4
     for list in items:
-        if item[0] == "Ring(+3)":
+        if list[0] == "Ring(+3)":
             return 3
     for list in items:
-        if item[0] == "Ring(+2)":
+        if list[0] == "Ring(+2)":
             return 2
     for list in items:
-        if item[0] == "Ring(+1)":
+        if list[0] == "Ring(+1)":
             return 1
     else:
         return 0
 
 def armor_player(items):
     for list in items:
-        if item[0] == "Armor(+5)":
+        if list[0] == "Armor(+5)":
             return 5
     for list in items:
-        if item[0] == "Armor(+4)":
+        if list[0] == "Armor(+4)":
             return 4
     for list in items:
-        if item[0] == "Armor(+3)":
+        if list[0] == "Armor(+3)":
             return 3
     for list in items:
-        if item[0] == "Armor(+2)":
+        if list[0] == "Armor(+2)":
             return 2
     for list in items:
-        if item[0] == "Armor(+1)":
+        if list[0] == "Armor(+1)":
             return 1
     else:
         return 0
 
-ring = int(ring_player(items))
-armor = int(armor_player(items))
-weapon = int(weapon_player(items))
+def stat_checker(items, full_name):
+    ring = int(ring_player(items))
+    armor = int(armor_player(items))
+    weapon = int(weapon_player(items))
+    User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
+    return User_stats
 
 # Ogre stats list
 #            dmg  hth arm
 Ogre_stats = [13, 13, 13, "Ogre"]
-
-# User base stats list
-User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
 
 # Contestants list that will include ten contestants of differing strengths.
 Contestants = [[random.randint(11,17), 8, 8, "Archer"],[11, 11, 11, "Palidin"],[random.randint(11,15), 9, 9, "Rogue"],[random.randint(11,12), 15, 11, "Dwarf"],[random.randint(11,15), random.randint(12,27), 10, "Bard"],[15, 15, 15, "Champion"]]
@@ -148,7 +149,10 @@ def chance(percent):
     
 # battle function that will check who wins based on their three stats.
 # 1 output = player1 won, 2 output = player2 won, 3 = it was a tie
-def battle(player1,player2, continueing_times):
+def battle(player1,player2,continueing_times):
+    if player1 == User_stats:
+        User_stats = stat_checker(items, full_name)
+        player1 = User_stats
     continueing_times = 0
     player2health = player2[1] - (player1[0] - player2[2])
     player1health = player1[1] - (player2[0] - player1[2])
@@ -230,11 +234,16 @@ def shop(shoplist, gold, items):
 
 # While the variable game_end is equal to false
 while game_end == False:
+
+    User_stats = stat_checker(items, full_name)
+
 # input asking if they want to go up, down, left, or right
     direction_choice = input(onespace.join(directions))
 
-
-
+    if direction_choice == "stats":
+        print("Weapon:", User_stats[0])
+        print("Health:", User_stats[1])
+        print("Armor:", User_stats[2])
 
 # if statement for up
     if direction_choice == "up":
@@ -325,6 +334,9 @@ while game_end == False:
                 break
             if armor_found == True:
                 armor_found = False
+                break
+            if ogre_won == True:
+                ogre_won = False
                 break
             trail_split_decicion = input("You have reached a trail split, would you like to go down the (sandy) trail or the (rocky) trail? (type leave if you want to go back to crossroad): ")
             if trail_split_decicion == "leave":
@@ -453,6 +465,7 @@ while game_end == False:
 # 				If input is equal to false
                     if runaway_or_not == "no":
 # 						Do fighting function with user and ogre
+
                         ogre_battle = battle(User_stats, Ogre_stats, continueing_times)
 # 						If win is equal to true
                         if ogre_battle == 1:
@@ -466,6 +479,7 @@ while game_end == False:
                         if ogre_battle == 2:
 # 							Print that they lost
                             print("You respawn at the crossroad")
+                            ogre_won = True
 # 							Break
                             break
                         if ogre_battle == 3:
@@ -586,7 +600,7 @@ while game_end == False:
                 while True:
                     player2 = Contestants[random.randint(0, 5)]
 # 				if gold is less then 30 print that they do not have enough money and break
-                    if gold < 30:
+                    if gold < 20:
                         print("you do not have enough gold")
                         break
 # 					Print that they are fighting (name)
@@ -596,13 +610,13 @@ while game_end == False:
 # 				If user won
                     if user_battle == 1:
 # 					Give user 60 gold
-                        gold += 60
-                        print("gain 60 gold")
+                        gold += 40
+                        print("gain 40 gold")
 # 				If user lost
                     if user_battle == 2:
 # 					Have user lose 60 gold
-                        gold -= 60
-                        print("loose 60 gold")
+                        gold -= 20
+                        print("loose 20 gold")
                     if user_battle == 3:
                         print("don't lose or gain anything")
 # 				Input asking if they want to fight again
@@ -626,6 +640,7 @@ while game_end == False:
 
 # If statement for right
     if direction_choice == "right":
+        directions[6] = "merchent(right)?: "
 # 	Print that they have met the traviling merchant and he says hello
         print("you have meet a traviling merchant and he says hello")
 # 	While true statement
@@ -704,7 +719,7 @@ while game_end == False:
 # 	Break
             break
 # Else print that is a invalid input and continue
-    elif direction_choice != "up" and direction_choice != "down" and direction_choice != "right" and direction_choice != "left":
+    elif direction_choice != "up" and direction_choice != "down" and direction_choice != "right" and direction_choice != "left" and direction_choice != "stats":
         print("invalid input")
         continue
 # Print “thanks for playing my game”
