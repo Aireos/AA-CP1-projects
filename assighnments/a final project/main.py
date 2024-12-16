@@ -116,22 +116,22 @@ def armor_player(items):
 ring = int(ring_player(items))
 armor = int(armor_player(items))
 weapon = int(weapon_player(items))
-User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
+User_stats = [10 + weapon, 10 + ring, 10 + armor, full_name]
 
 def stat_checker(items, full_name):
     ring = int(ring_player(items))
     armor = int(armor_player(items))
     weapon = int(weapon_player(items))
-    User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
+    User_stats = [10 + weapon, 10 + ring, 10 + armor, full_name]
     return User_stats
 
 
 # Ogre stats list
 #            dmg  hth arm
-Ogre_stats = [13, 13, 13, "Ogre"]
+Ogre_stats = [14, 18, 13, "Ogre"]
 
 # Contestants list that will include ten contestants of differing strengths.
-Contestants = [[random.randint(11,17), 8, 8, "Archer"],[11, 11, 11, "Palidin"],[random.randint(11,15), 9, 9, "Rogue"],[random.randint(11,12), 15, 11, "Dwarf"],[random.randint(11,15), random.randint(12,27), 10, "Bard"],[15, 15, 15, "Champion"]]
+Contestants = [[9, 9, 9, "goblin"], [12, 12, 12, "Archer"],[13, 13, 13, "Palidin"],[11, 11, 11, "Rogue"],[15, 15, 15, "Dwarf"],[14, 14, 14, "Bard"],[16, 16, 15, "Champion"]]
 
 # a item list for the blacksmith
 blacksmith_list = [["Armor(+1)", 10, 1, 1], ["Armor(+2)", 20, 2, 1], ["Armor(+3)", 30, 3, 1], ["Armor(+4)", 40, 4, 1]]
@@ -199,9 +199,7 @@ def battle(player1,player2,continueing_times, User_stats):
                 print(player1[3], "won!")
                 return 1
             elif continueing_times >= 50:
-                while True:
-                    time.sleep(1)
-                    print("Error in battle, restart game")
+                print("It was a tie!")
             if player1health and player2health > 0 and continueing_times < 50:
                 continueing_times += 1
                 continue
@@ -497,7 +495,7 @@ while game_end == False:
                         continue
 #else statement
             if trail_split_decicion != "rocky" and trail_split_decicion != "sandy":
-                print("invalid input (trail)")
+                print("invalid input")
                 continue
 
 
