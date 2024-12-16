@@ -113,12 +113,18 @@ def armor_player(items):
     else:
         return 0
 
+ring = int(ring_player(items))
+armor = int(armor_player(items))
+weapon = int(weapon_player(items))
+User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
+
 def stat_checker(items, full_name):
     ring = int(ring_player(items))
     armor = int(armor_player(items))
     weapon = int(weapon_player(items))
     User_stats = [11 + weapon, 11 + ring, 11 + armor, full_name]
     return User_stats
+
 
 # Ogre stats list
 #            dmg  hth arm
@@ -149,7 +155,7 @@ def chance(percent):
     
 # battle function that will check who wins based on their three stats.
 # 1 output = player1 won, 2 output = player2 won, 3 = it was a tie
-def battle(player1,player2,continueing_times):
+def battle(player1,player2,continueing_times, User_stats):
     if player1 == User_stats:
         User_stats = stat_checker(items, full_name)
         player1 = User_stats
@@ -466,7 +472,7 @@ while game_end == False:
                     if runaway_or_not == "no":
 # 						Do fighting function with user and ogre
 
-                        ogre_battle = battle(User_stats, Ogre_stats, continueing_times)
+                        ogre_battle = battle(User_stats, Ogre_stats, continueing_times, User_stats)
 # 						If win is equal to true
                         if ogre_battle == 1:
 # 							Print that they found a +5 sword
@@ -516,7 +522,7 @@ while game_end == False:
 # 					Print that they are watching (name) and (name) fight
                     print("You are watching", player1[3], "and", player2[3], "fight.")
 # 					Do fighting function for the two of them
-                    battle(player1, player2, continueing_times)
+                    battle(player1, player2, continueing_times, User_stats)
 # 					Input asking if they want to watch again
                     stands_decicion = input("Do you wish to watch again? (yes or no): ")
 # 					If input is equal to no
@@ -556,7 +562,7 @@ while game_end == False:
                             print("you do not have that much money.")
                             continue
 # 					Do fighting function for the two of them
-                    betting_battle = battle(player1, player2, continueing_times)
+                    betting_battle = battle(player1, player2, continueing_times, User_stats)
 # 					If the users guess is correct
                     if betting_battle == betting_input:
 # 						Give double gold back
@@ -606,7 +612,7 @@ while game_end == False:
 # 					Print that they are fighting (name)
                     print("you are fighting", player2[3])
 # 				Do fighting function for the two of them
-                    user_battle = battle(User_stats, player2, continueing_times)
+                    user_battle = battle(User_stats, player2, continueing_times, User_stats)
 # 				If user won
                     if user_battle == 1:
 # 					Give user 60 gold
