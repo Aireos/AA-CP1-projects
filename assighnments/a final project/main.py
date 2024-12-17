@@ -200,6 +200,7 @@ def battle(player1,player2,continueing_times, User_stats):
                 return 1
             elif continueing_times >= 50:
                 print("It was a tie!")
+                return 3
             if player1health and player2health > 0 and continueing_times < 50:
                 continueing_times += 1
                 continue
